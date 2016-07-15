@@ -26,7 +26,7 @@ class Multiply
   end
 
   def welcome
-    puts "Multiples of 3 and 5"
+    puts "Sum of Multiples of 3 and 5"
     print "Limit: "
     STDOUT.flush
     @limit = gets.chomp.to_i
