@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require 'pry'
 
-class Multiply
+class Fibonacci
   attr_accessor :limit, :sum
 
   def initialize
@@ -29,4 +29,4 @@ class Multiply
   end
 end
 
-Multiply.new
+Fibonacci.new
