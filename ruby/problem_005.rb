@@ -7,7 +7,7 @@ class SmallestMultiple
   def initialize
     limit = welcome
     get_prime_factors(limit)
-    smallest_multiple(limit)
+    raise_prime_under(limit)
   end
 
   def get_prime_factors(limit)
@@ -25,18 +25,15 @@ class SmallestMultiple
     end
   end
 
-  def smallest_multiple(limit)
+  def raise_prime_under(limit)
     @prime_factors.each_with_index do |prime, index|
-      i = 1
-      binding.pry
+      i = 2
       while (prime ** i < limit)
-        binding.pry
         if prime ** i < limit
           i += 1
         end
       end
-      binding.pry
-      @prime_factors[index] **= i
+      @prime_factors[index] **= (i - 1)
     end
   end
 
