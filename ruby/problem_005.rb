@@ -15,13 +15,8 @@ class SmallestMultiple
     @prime_factors = [2, 3]
     (4..limit).each do |value|
       @prime_factors.each do |prime|
-        if value % prime == 0
-          break
-        else
-          if prime == @prime_factors.last
-            @prime_factors << value
-          end
-        end
+        break if value % prime == 0
+        @prime_factors << value if prime == @prime_factors.last
       end
     end
   end
@@ -29,10 +24,8 @@ class SmallestMultiple
   def raise_prime_under(limit)
     @prime_factors.each_with_index do |prime, index|
       i = 2
-      while (prime ** i < limit)
-        if prime ** i < limit
-          i += 1
-        end
+      while (prime ** i <= limit)
+        i += 1 if prime ** i <= limit
       end
       @prime_factors[index] **= (i - 1)
     end
@@ -40,9 +33,7 @@ class SmallestMultiple
 
   def get_multiple
     multiple = 1
-    @prime_factors.each do |number|
-      multiple *= number
-    end
+    @prime_factors.each { |number| multiple *= number }
     puts multiple
   end
 
