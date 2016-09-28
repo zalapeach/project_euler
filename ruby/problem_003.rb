@@ -6,10 +6,10 @@ class PrimeFactor
 
   def initialize
     number = welcome
-    get_factors(number)
+    get_largest_factor(number)
   end
 
-  def get_factors(number)
+  def get_largest_factor(number)
     factor = 2
     while number > 1
       while (number % factor == 0)
