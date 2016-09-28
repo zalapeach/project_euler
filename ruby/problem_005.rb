@@ -8,6 +8,7 @@ class SmallestMultiple
     limit = welcome
     get_prime_factors(limit)
     raise_prime_under(limit)
+    get_multiple
   end
 
   def get_prime_factors(limit)
@@ -35,6 +36,14 @@ class SmallestMultiple
       end
       @prime_factors[index] **= (i - 1)
     end
+  end
+
+  def get_multiple
+    multiple = 1
+    @prime_factors.each do |number|
+      multiple *= number
+    end
+    puts multiple
   end
 
   def welcome
