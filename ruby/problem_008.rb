@@ -30,7 +30,7 @@ class LargestProductSeries
     71636269561882670428252483600823257530420752963450"
       .delete!("\n    ").split('')
     @digit_array.map! { |value| value.to_i }
-    get_largest_product
+    puts get_largest_product
   end
 
   def get_largest_product
