@@ -7,29 +7,35 @@ class PythagoreanTriplet
 
   def initialize
     @sum = welcome
-    @triplets = []
-    get_pythagorean_triplet(1, 2)
+    a, b, c = get_pythagorean_triplet
+    print_pythagorean_triplet(a, b, c)
   end
 
-  def get_pythagorean_triplet(m, n)
-    calculate_values(m, n)
-    get_pythagorean_triplet(m + 1, n + 1)
+  def get_pythagorean_triplet
+    m = 0
+    (0..@sum).each do |n|
+      delta = n**2 + 2*@sum
+      m1 = (-n + Math.sqrt(delta)) / 2
+      m2 = (-n - Math.sqrt(delta)) / 2
+      if m1 % 1 == 0 && m1 > n
+        m = m1
+      elsif m2 % 1 == 0 && m2 > n
+        m = m2
+      end
+      if m != 0
+        return [2*m*n, m**2 - n**2, m**2 + n**2]
+        break
+      end
+    end
+    return [0, 0, 0]
   end
 
-  def calculate_values(m, n)
-    a = (n ** 2) - (m ** 2)
-    b = 2 * n * m
-    c = (n ** 2) + (m ** 2)
-    store_pythagoran_triplet(a, b, c)
-  end
-
-  def store_pythagoran_triplet(a, b, c)
-    @triplets << [a, b, c]
-    get_composite_pythagorean_triplet if @triplets.size > 1
-  end
-
-  def get_composite_pythagorean_triplet
-    binding.pry
+  def print_pythagorean_triplet(a, b, c)
+    if (a + b + c) > 0
+      puts "#{ a } x #{ b } x #{ c } = #{ a*b*c }"
+    else
+      puts "no pythagorean triplet with this sum"
+    end
   end
 
   def welcome
