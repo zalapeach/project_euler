@@ -10,25 +10,13 @@ class LargestProductGrid
     @max_value = 0
     @grid.each_with_index do |row, i|
       row.each_with_index do |col, j|
-        line_up(i, j)
         line_right(i, j)
         line_bottom(i, j)
-        line_left(i, j)
+        line_bottom_right(i, j)
+        line_up_right(i, j)
       end
     end
     puts "MAX_VALUE: #{ @max_value }"
-  end
-
-  def line_up(i, j)
-    values = []
-    result = 0
-    if (i - @adjacents + 1) >= 0
-      ((i - @adjacents + 1)..i).each do |vertical|
-        values << @grid[vertical][j]
-      end
-      result = values.inject(:*) unless values.include?(0)
-      @max_value = result if result > @max_value
-    end
   end
 
   def line_right(i, j)
@@ -55,12 +43,24 @@ class LargestProductGrid
     end
   end
 
-  def line_left(i, j)
+  def line_bottom_right(i, j)
     values = []
     result = 0
-    if (j - @adjacents + 1) >= 0
-      ((j - @adjacents + 1)..j).each do |horizontal|
-        values << @grid[i][horizontal]
+    if i + @adjacents - 1 < 20 && j + @adjacents - 1 < 20
+      @adjacents.times do |position|
+        values << @grid[i + position][j + position]
+      end
+      result = values.inject(:*) unless values.include?(0)
+      @max_value = result if result > @max_value
+    end
+  end
+
+  def line_up_right(i, j)
+    values = []
+    result = 0
+    if i >= @adjacents - 1 && j + @adjacents - 1 < 20
+      @adjacents.times do |position|
+        values << @grid[i - position][j + position]
       end
       result = values.inject(:*) unless values.include?(0)
       @max_value = result if result > @max_value
